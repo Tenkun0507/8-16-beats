@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1222">
+  <meta name="description" content="4拍のクリックだけを頼りに8ビート・16ビートを刻むリズム精度ゲーム。結果を64/128目盛と音で解析。">
+  <title>GROOVE GRID | Rhythm Accuracy Lab</title>
+  <style>
+:root{color-scheme:dark;--page:#0b1222;--panel:#15233a;--panel-top:#1d2d49;--stroke:#32465f;--muted:#acbed6;--text:#f4f8ff;--mint:#90efd5;--purple:#b5a4fc;--warn:#f7d28c;--red:#ff99ad}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse 80% 50% at 50% -18%,#263963 0%,var(--page) 65%);color:var(--text);font-family:system-ui,-apple-system,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;line-height:1.55}button,input{font:inherit}button{cursor:pointer;-webkit-tap-highlight-color:transparent}button:focus-visible,input:focus-visible{outline:3px solid #b9fff0;outline-offset:3px}button:disabled{cursor:default;opacity:.55}.shell{max-width:1030px;margin:0 auto;padding:25px 18px 35px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px}.branding{display:flex;align-items:center;gap:14px}.mark{width:47px;height:47px;border-radius:14px;background:#243850;display:grid;grid-template-columns:repeat(2,9px);grid-template-rows:repeat(2,9px);gap:5px;place-content:center;transform:rotate(-8deg)}.mark span{border-radius:3px;background:var(--mint)}.mark span:nth-child(2),.mark span:nth-child(3){background:var(--purple)}.eyebrow,.section-index{font-size:10px;letter-spacing:2.5px;color:var(--mint);font-weight:850}.topbar h1{font-size:clamp(24px,4vw,34px);line-height:1.1;letter-spacing:-1.5px;margin:3px 0 0;font-weight:950}.topbar h1 em{font-style:normal;color:var(--mint)}.edition{font-size:10px;color:#9dacc5;letter-spacing:1px;border:1px solid var(--stroke);border-radius:30px;padding:7px 12px;white-space:nowrap}.lead{margin:15px 0 22px;color:#bdcde2;font-size:14px;max-width:900px}.lead strong{color:white}.play-layout{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:14px;align-items:stretch}.panel{background:linear-gradient(155deg,#192a43 0%,#132139 100%);border:1px solid var(--stroke);border-radius:20px;padding:22px}.section-index span{color:#a5b8d0;margin-left:7px}.panel h2{font-size:20px;letter-spacing:-.5px;margin:7px 0 16px}.group-label{display:block;font-size:12px;font-weight:800;color:#cbd8eb;margin:17px 0 8px}.button-group{display:grid;gap:6px}.button-group.two{grid-template-columns:repeat(2,minmax(0,1fr))}.button-group.four{grid-template-columns:repeat(4,minmax(0,1fr))}.button-group.three{grid-template-columns:repeat(3,minmax(0,1fr))}.option{min-width:0;border:1px solid #425773;color:#d0dff0;background:#263852;border-radius:10px;padding:12px 3px;font-size:12px;font-weight:850;transition:border-color .12s}.option small{display:block;font-size:10px;color:#bccbe0;font-weight:500;margin-top:2px}.option.selected{background:#6357a0;border-color:#c4baff;color:#fff}.option.selected small{color:#eee9ff}.button-group.four .option{font-size:11px;padding:11px 1px}.tempo-card,.calibration{background:#101f34;border:1px solid #354b66;border-radius:13px;padding:14px;margin-top:13px}.tempo-line{display:flex;justify-content:space-between;align-items:center;gap:6px;color:#bdcee3;font-size:12px}.tempo-line strong{font-size:20px;color:var(--mint);white-space:nowrap}.tempo-line strong small{font-size:12px}.tempo-card input[type=range],.calibration input[type=range]{display:block;width:100%;accent-color:var(--mint);margin:13px 0 7px}.caption{font-size:12px;color:var(--muted);line-height:1.65;margin:4px 0}.calibration summary{cursor:pointer;color:#b7c8dd;font-size:12px;font-weight:650}.calibration p{margin:12px 0}.calibration .tempo-line strong{font-size:14px}.setup-help{display:flex;gap:10px;color:#adc1d8;font-size:11px;line-height:1.7;margin-top:15px}.setup-help strong{color:#deebff}.help-icon{font-size:22px;color:var(--mint);line-height:1}.play-heading-row{display:flex;align-items:center;justify-content:space-between;gap:7px}.play-heading-row h2{margin-bottom:8px}.pill{font-size:10px;letter-spacing:1px;background:#27445a;color:var(--mint);border-radius:30px;padding:5px 11px;font-weight:850}.game-message{font-size:14px;font-weight:850;color:#d9eaff;min-height:24px}.game-sub{color:var(--muted);font-size:12px;min-height:36px}.tap-pad{display:flex;position:relative;overflow:hidden;flex-direction:column;align-items:center;justify-content:center;width:min(100%,375px);aspect-ratio:1/1;margin:15px auto;border-radius:25px;background:linear-gradient(150deg,#315069,#243952);color:#f1fbff;border:2px solid #7199b0;box-shadow:inset 0 1px #ffffff21,0 7px 0 #0e2234;touch-action:manipulation;user-select:none;-webkit-user-select:none;appearance:none}.tap-pad:active,.tap-pad:hover,.tap-pad:focus{background:linear-gradient(150deg,#315069,#243952);border-color:#7199b0;color:#f1fbff;transform:none;box-shadow:inset 0 1px #ffffff21,0 7px 0 #0e2234}.tap-pad:focus-visible{outline:3px solid var(--mint);outline-offset:3px}.tap-ring{width:58%;aspect-ratio:1;position:absolute;border-radius:50%;border:1px solid #96c8d435;box-shadow:0 0 0 18px #afdef008,0 0 0 40px #b4def006}.tap-word{position:relative;font-size:clamp(50px,9vw,81px);font-weight:950;letter-spacing:2px;line-height:1}.tap-secondary{position:relative;font-size:10px;letter-spacing:1.5px;margin-top:10px;color:#a8cbdb;font-weight:750}.key-hint{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;color:#a9bfd6;font-size:11px;margin:12px auto 16px}kbd{font-size:11px;display:inline-flex;align-items:center;justify-content:center;min-width:27px;padding:5px 7px;border:1px solid #617a95;border-bottom-width:3px;background:#2d415a;color:#eaf4ff;border-radius:7px;font-family:inherit;font-weight:850}.primary-button,.replay-button{display:block;width:100%;border:0;background:linear-gradient(90deg,#b9abff,#98efd7);color:#19283c;border-radius:13px;padding:15px 12px;font-weight:950;font-size:15px}.silent-note{text-align:center;color:#8fa7c2;font-size:10px;line-height:1.65;margin:12px 0 0}.results{margin-top:20px}.results[hidden]{display:none}.result-header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:5px 0 12px}.result-header h2{font-size:23px;letter-spacing:-.5px;margin:5px 0}.rank-area{text-align:center;background:#253b50;min-width:93px;border:1px solid #416a70;padding:8px;border-radius:13px}.rank-area span{display:block;color:#a9cadd;font-size:10px}.rank-area strong{color:var(--mint);font-size:33px;line-height:1.2}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:12px 0}.metric{background:#1a2c42;border:1px solid var(--stroke);border-radius:13px;text-align:center;padding:12px 3px}.metric span{font-size:11px;color:#b2c7db;display:block}.metric strong{font-size:22px;display:block;color:white;font-variant-numeric:tabular-nums}.analysis-panel{margin-top:13px}.analysis-head{display:flex;justify-content:space-between;align-items:start;gap:10px}.analysis-head h3{font-size:17px;margin:0}.analysis-head .caption{max-width:600px}.bar-controls{display:flex;gap:4px}.bar-controls button{font-size:12px;color:#c0d5e7;border:1px solid #476077;background:#273b54;width:35px;height:33px;border-radius:8px}.bar-controls button.selected{color:#fff;background:#6756af;border-color:#ad9df6}.legend{display:flex;gap:17px;flex-wrap:wrap;font-size:12px;margin:12px 0;color:#d9e8f2}.legend-ideal{color:var(--purple)}.legend-you{color:var(--mint)}.legend-miss{color:var(--red)}.scrollframe{background:#0d1d33;border:1px solid #34516f;border-radius:10px;overflow-x:auto;overscroll-behavior-x:contain;touch-action:pan-x;scrollbar-color:#587491 #0d1d33}.timeline{display:block;max-width:none}.scroll-hint{text-align:center;margin:6px 0 10px}.note-detail{min-height:65px;border:1px solid #3d5871;border-radius:11px;background:#20354b;padding:11px;color:#dcedfa;font-size:13px;line-height:1.7}.note-detail strong{color:var(--mint)}.judgment-heading{font-size:12px;font-weight:850;color:#d3e4f6;margin:15px 0 7px}.judgment-heading span{font-size:11px;color:#a8bbd0;font-weight:500;margin-left:7px}.judgments{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:5px}.judgment{min-width:0;background:#263a54;color:#d5e4f5;border:1px solid #3e5874;border-radius:8px;padding:7px 0 5px;font-size:17px;font-weight:900;text-align:center}.judgment small{display:block;color:#afc8dc;font-size:9px;font-weight:550;font-variant-numeric:tabular-nums;margin-top:2px}.judgment.perfect{color:var(--mint)}.judgment.great{color:var(--warn)}.judgment.good{color:#c8c8fc}.judgment.miss{color:var(--red)}.judgment.selected{outline:2px solid #87f6dc;outline-offset:1px}.symbol-legend{color:#aebfda;font-size:11px;display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}.replay-options{display:grid;grid-template-columns:1fr 1fr;gap:16px}.replay-options .group-label{margin-top:14px}.replay-options .option{font-size:11px}.checkbox-line{display:flex;align-items:center;gap:9px;font-size:12px;color:#bbcfe1;margin:16px 0}.checkbox-line input{accent-color:var(--mint);width:17px;height:17px}.replay-button{background:#a9a2fd}.replay-button.playing{background:#f3b1be}footer{text-align:center;color:#8198b4;font-size:11px;padding:25px 5px 0}
+@media(max-width:780px){.play-layout{grid-template-columns:1fr}.control-panel{padding:18px}.game-panel{padding:18px}.game-sub{min-height:auto}.tap-pad{width:min(100%,360px)}.replay-options{grid-template-columns:1fr;gap:0}}@media(max-width:500px){.shell{padding:15px 9px 28px}.topbar h1{font-size:26px}.edition{display:none}.lead{font-size:12px;line-height:1.8;margin-bottom:14px}.panel{border-radius:16px;padding:14px 10px}.tap-pad{width:min(100%,350px);border-radius:19px;margin:12px auto}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.analysis-head{flex-direction:column}.bar-controls{width:100%}.bar-controls button{flex:1}.judgments{gap:3px}.judgment{font-size:15px}.judgment small{font-size:8px}.result-header h2{font-size:20px}.group-label{margin-top:13px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* During gameplay the setup panel disappears and the play pad becomes the focus. */
+.play-layout.is-playing{grid-template-columns:minmax(0,1fr)}
+.play-layout.is-playing .game-panel{width:100%;max-width:675px;margin-inline:auto}
+
+</style>
+
+</head>
+<body>
+  <div class="shell" id="app">
+    <header class="topbar">
+      <div class="branding">
+        <div class="mark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        <div><div class="eyebrow">RHYTHM ACCURACY LAB</div><h1>GROOVE <em>GRID</em></h1></div>
+      </div>
+      <span class="edition">WEB EDITION / 01</span>
+    </header>
+    <p class="lead">頼れるのは<strong>4拍のクリック音</strong>だけ。8分・16分の細かいリズムを自分で刻み、あとから目と耳でズレを分析しよう。</p>
+
+    <main class="play-layout">
+      <aside class="control-panel panel" id="settings">
+        <div class="section-index">01 <span>SETUP</span></div>
+        <h2>リズム設定</h2>
+        <label class="group-label">刻み方</label>
+        <div class="button-group two" id="rhythmOptions" role="group" aria-label="刻み方">
+          <button type="button" class="option selected" data-rhythm="8" aria-pressed="true">8ビート<small>1拍で2タップ</small></button>
+          <button type="button" class="option" data-rhythm="16" aria-pressed="false">16ビート<small>1拍で4タップ</small></button>
+        </div>
+        <label class="group-label">難易度</label>
+        <div class="button-group four" id="levelOptions" role="group" aria-label="難易度">
+          <button type="button" class="option selected" data-level="custom" aria-pressed="true">カスタム</button>
+          <button type="button" class="option" data-level="easy" aria-pressed="false">初級</button>
+          <button type="button" class="option" data-level="medium" aria-pressed="false">中級</button>
+          <button type="button" class="option" data-level="hard" aria-pressed="false">上級</button>
+        </div>
+        <div class="tempo-card">
+          <div class="tempo-line"><span id="tempoLabel">BPMを自由に設定</span><strong id="tempoText">90 <small>BPM</small></strong></div>
+          <input id="bpm" type="range" min="40" max="180" value="90" step="1" aria-label="テンポ（BPM）">
+          <p class="caption" id="tempoRange">40〜180 BPM</p>
+        </div>
+        <details class="calibration"><summary>端末の音声遅延を調整する</summary>
+          <p class="caption">いつも同じだけ遅く判定される場合は、プラス方向へ補正。Bluetoothイヤホンは遅延が大きい場合があるよ。</p>
+          <div class="tempo-line"><span>タップ時刻の補正</span><strong id="offsetText">0 ms</strong></div>
+          <input id="offset" type="range" min="-200" max="200" value="0" step="5" aria-label="タップ時刻補正（ミリ秒）">
+        </details>
+        <div class="setup-help"><span class="help-icon" aria-hidden="true">◎</span><span>初級〜上級は<strong>8ビートと16ビートでBPM範囲が別</strong>。開始時に範囲内でランダム抽選するよ。</span></div>
+      </aside>
+
+      <section class="game-panel panel" aria-labelledby="playHeading">
+        <div class="section-index">02 <span>PLAY</span></div>
+        <div class="play-heading-row"><h2 id="playHeading">耳だけで刻む</h2><span class="pill" id="liveMode">READY</span></div>
+        <div class="game-message" id="message" aria-live="polite">4拍のカウントイン → 4小節チャレンジ</div>
+        <div class="game-sub" id="gameSub">プレイ中の光・数字・判定ガイドはなし。タップすると自分の音が鳴るよ。</div>
+        <button id="tap" class="tap-pad" type="button" aria-label="リズムをタップ（PCはスペース・F・Jキーでも操作可能）">
+          <span class="tap-ring" aria-hidden="true"></span>
+          <span class="tap-word">TAP</span>
+          <span class="tap-secondary">ANYWHERE IN THIS SQUARE</span>
+        </button>
+        <div class="key-hint"><kbd>SPACE</kbd><span>または</span><kbd>F</kbd><kbd>J</kbd><span> / スマホは画面をタップ</span></div>
+        <button type="button" class="primary-button" id="start">▶ チャレンジ開始</button>
+        <p class="silent-note">クリック音：4拍子のみ ／ 入力音：ウッドブロック ／ 正解音：結果画面のハイハット</p>
+      </section>
+    </main>
+
+    <section class="results" id="results" hidden aria-labelledby="resultHeading">
+      <div class="result-header">
+        <div><div class="section-index">03 <span>ANALYZE</span></div><h2 id="resultHeading">リズムを解剖しよう</h2><p id="resultSummary" class="caption"></p></div>
+        <div class="rank-area"><span>YOUR RANK</span><strong id="rank">—</strong></div>
+      </div>
+      <div class="metrics">
+        <div class="metric"><span>総合精度</span><strong id="accuracy">—</strong></div>
+        <div class="metric"><span>平均絶対ズレ</span><strong id="average">—</strong></div>
+        <div class="metric"><span>平均方向</span><strong id="bias">—</strong></div>
+        <div class="metric"><span>最大コンボ</span><strong id="combo">—</strong></div>
+      </div>
+
+      <div class="panel analysis-panel">
+        <div class="analysis-head"><div><h3>64 / 128分割 タイミンググリッド</h3><p class="caption" id="gridCaption">紫＝理想 / ミント＝実際。自分の位置は目盛単位で確認できる。</p></div><div class="bar-controls" id="barControls" role="group" aria-label="表示する小節">
+          <button type="button" data-bar="0" class="selected" aria-pressed="true">1</button><button type="button" data-bar="1" aria-pressed="false">2</button><button type="button" data-bar="2" aria-pressed="false">3</button><button type="button" data-bar="3" aria-pressed="false">4</button>
+        </div></div>
+        <div class="legend"><span class="legend-ideal">◆ 正解位置</span><span class="legend-you">● 実際のタップ</span><span class="legend-miss">× タップなし</span></div>
+        <div class="scrollframe" id="timelineScroll" tabindex="0" aria-label="タイミンググリッド、横にスクロールして閲覧可能">
+          <svg id="timeline" class="timeline" role="img" aria-label="64/128目盛に対応したタイミンググリッド"></svg>
+        </div>
+        <p class="caption scroll-hint">← 横スクロールで細部を見る →</p>
+        <div class="note-detail" id="noteDetail" aria-live="polite">各タップを選択すると、目盛位置と時間差が表示されるよ。</div>
+        <div class="judgment-heading">1小節分の判定 <span>押して詳細を表示</span></div>
+        <div class="judgments" id="judgments"></div>
+        <div class="symbol-legend">● PERFECT <span>☆ GREAT</span> <span>○ GOOD</span> <span>× MISS</span></div>
+      </div>
+
+      <div class="panel analysis-panel replay-panel">
+        <div class="analysis-head"><div><h3>聴き比べリプレイ <span aria-hidden="true">♫</span></h3><p class="caption">正解はシャッという<strong>ハイハット</strong>、自分のタップはコッという<strong>ウッドブロック</strong>。重ねるとズレが聴こえる。</p></div></div>
+        <div class="replay-options">
+          <div><label class="group-label">再生する音</label><div class="button-group three" id="replayMix" role="group" aria-label="聴き比べ方法">
+            <button type="button" data-mix="ideal" class="option" aria-pressed="false">正解のみ</button><button type="button" data-mix="mine" class="option" aria-pressed="false">自分のみ</button><button type="button" data-mix="both" class="option selected" aria-pressed="true">重ねて比較</button>
+          </div></div>
+          <div><label class="group-label">ドラム伴奏（リプレイのみ）</label><div class="button-group four" id="replayDrums" role="group" aria-label="伴奏の種類">
+            <button type="button" data-drums="off" class="option selected" aria-pressed="true">なし</button><button type="button" data-drums="snare" class="option" aria-pressed="false">スネア</button><button type="button" data-drums="8" class="option" aria-pressed="false">8ビート</button><button type="button" data-drums="16" class="option" aria-pressed="false">16ビート</button>
+          </div></div>
+        </div>
+        <label class="checkbox-line"><input type="checkbox" id="replayClick" checked>4拍メトロノームも鳴らす</label>
+        <button type="button" class="replay-button" id="replay">♫ 4小節を再生</button>
+      </div>
+    </section>
+    <footer>GROOVE GRID · ブラウザだけで動作 · データは端末上で処理され、送信されないよ。</footer>
+  </div>
+<script>
+/* GROOVE GRID: dependency-free, GitHub Pages-ready. Audio and timing stay on this device. */
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const all = selector => [...document.querySelectorAll(selector)];
+  const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+  const BPM_RANGES = Object.freeze({
+    8: {easy:[70,95], medium:[96,125], hard:[126,160]},
+    16:{easy:[45,65], medium:[66,85], hard:[86,110]}
+  });
+  const COLORS = {ideal:'#b5a4fc', mine:'#90efd5', miss:'#ff99ad', extra:'#ffd38f'};
+  const SYMBOLS = {perfect:'●', great:'☆', good:'○', miss:'×'};
+
+  const state = {
+    rhythm:8, level:'custom', customBpm:90, bpm:90, correction:0,
+    division:2, units:64, beatMs:60000/90, stepMs:30000/90,
+    ctx:null, noiseBuffer:null, playing:false, replaying:false,
+    raf:0, replayTimer:0, replayBus:null,
+    firstPerf:0, targets:[], taps:[],
+    mix:'both', drums:'off', bar:0, selected:0
+  };
+  const keysDown = new Set();
+  const noteCount = () => 16 * state.division;
+  const notesInBar = () => 4 * state.division;
+  const measureMs = () => state.beatMs * 4;
+  const gridMs = () => measureMs() / state.units;
+  const windowMs = () => Math.min(130, state.stepMs * .46);
+  const perfectMs = () => Math.min(40, state.stepMs * .23);
+  const greatMs = () => Math.min(78, state.stepMs * .36);
+  const signed = v => `${v > 0 ? '+' : v < 0 ? '−' : '±'}${Math.round(Math.abs(v))} ms`;
+
+  function markChoice(selector, key, wanted) {
+    all(selector).forEach(button => {
+      const active = String(button.dataset[key]) === String(wanted);
+      button.classList.toggle('selected', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
+  }
+  function configure() {
+    markChoice('[data-rhythm]', 'rhythm', state.rhythm);
+    markChoice('[data-level]', 'level', state.level);
+    const custom = state.level === 'custom';
+    $('bpm').hidden = !custom;
+    $('tempoLabel').textContent = custom ? 'BPMを自由に設定' : '開始時にBPMを抽選';
+    $('tempoText').innerHTML = custom ? `${state.customBpm} <small>BPM</small>` : '??? <small>BPM</small>';
+    $('tempoRange').textContent = custom ? '40〜180 BPM' : `${BPM_RANGES[state.rhythm][state.level][0]}〜${BPM_RANGES[state.rhythm][state.level][1]} BPM からランダム`;
+    $('offsetText').textContent = signed(state.correction);
+  }
+
+  function audioContext() {
+    if (!state.ctx) {
+      const Audio = window.AudioContext || window.webkitAudioContext;
+      if (!Audio) throw new Error('Web Audio APIに対応していないブラウザみたい。');
+      state.ctx = new Audio();
+    }
+    return state.ctx;
+  }
+  async function ensureAudio() {
+    const ctx = audioContext();
+    if (ctx.state !== 'running') await ctx.resume();
+    if (ctx.state !== 'running') throw new Error('音声を開始できなかった。端末の消音設定を確認してね。');
+    return ctx;
+  }
+  // Convert the scheduled Web Audio clock to the high-resolution input-event clock.
+  function audioToPerf(audioSec) {
+    const ctx = state.ctx;
+    if (typeof ctx.getOutputTimestamp === 'function') {
+      try {
+        const ts = ctx.getOutputTimestamp();
+        if (Number.isFinite(ts.contextTime) && ts.performanceTime > 0) {
+          return ts.performanceTime + (audioSec - ts.contextTime) * 1000;
+        }
+      } catch (_) { /* Browser may lack output timestamps. */ }
+    }
+    return performance.now() + (audioSec - ctx.currentTime) * 1000;
+  }
+  function inputTime(event) {
+    const now = performance.now();
+    return Number.isFinite(event.timeStamp) && Math.abs(now - event.timeStamp) < 2500 ? event.timeStamp : now;
+  }
+
+  function tone(time, frequency, length, volume, destination, shape='sine') {
+    const ctx = state.ctx, dest = destination || ctx.destination;
+    const osc = ctx.createOscillator(), gain = ctx.createGain();
+    osc.type = shape;
+    osc.frequency.setValueAtTime(frequency, time);
+    gain.gain.setValueAtTime(Math.max(.00001, volume), time);
+    gain.gain.exponentialRampToValueAtTime(.00001, time + length);
+    osc.connect(gain).connect(dest);
+    osc.start(time); osc.stop(time + length + .005);
+  }
+  function getNoise() {
+    if (!state.noiseBuffer) {
+      const ctx = state.ctx;
+      const frames = Math.ceil(ctx.sampleRate * .22);
+      const buffer = ctx.createBuffer(1, frames, ctx.sampleRate);
+      const samples = buffer.getChannelData(0);
+      for (let i = 0; i < samples.length; i++) samples[i] = (Math.random() * 2 - 1);
+      state.noiseBuffer = buffer;
+    }
+    return state.noiseBuffer;
+  }
+  function noise(time, duration, volume, cutoff, dest) {
+    const ctx=state.ctx, source=ctx.createBufferSource(), high=ctx.createBiquadFilter(), gain=ctx.createGain();
+    source.buffer=getNoise();
+    high.type='highpass';high.frequency.value=cutoff;
+    gain.gain.setValueAtTime(Math.max(.00001,volume),time);
+    gain.gain.exponentialRampToValueAtTime(.00001,time+duration);
+    source.connect(high).connect(gain).connect(dest||ctx.destination);
+    source.start(time);source.stop(time+duration+.003);
+  }
+  function quarterClick(t, accent, dest) {
+    // Soft pitched metronome: not a hat, not the player's woodblock.
+    tone(t,accent?1130:805,.048,accent?.12:.085,dest,'sine');
+  }
+  function woodblock(t, dest=null, volume=1) {
+    // Low, dry 'tok!' to distinguish the user's sound from reference hats.
+    const ctx=state.ctx, out=dest||ctx.destination;
+    const osc=ctx.createOscillator(), env=ctx.createGain();
+    osc.type='triangle';
+    osc.frequency.setValueAtTime(520,t);
+    osc.frequency.exponentialRampToValueAtTime(305,t+.06);
+    env.gain.setValueAtTime(.18*volume,t);
+    env.gain.exponentialRampToValueAtTime(.00001,t+.085);
+    osc.connect(env).connect(out);
+    osc.start(t);osc.stop(t+.091);
+    tone(t,185,.037,.042*volume,out,'square');
+  }
+  function hiHat(t, dest=null, volume=.065) { noise(t,.038,volume,5700,dest); }
+  function kick(t, dest) { tone(t,94,.12,.16,dest,'sine'); }
+  function snare(t, dest) { noise(t,.115,.12,1250,dest);tone(t,175,.048,.033,dest,'triangle'); }
+  function playTapSound() {
+    try {if(state.ctx && state.ctx.state==='running') woodblock(state.ctx.currentTime+.001);}
+    catch (_) { /* Never interrupt scoring if audio hardware fails mid-song. */ }
+  }
+
+  function newTargets() {
+    return Array.from({length:noteCount()},(_,index)=>({index, ideal:state.firstPerf+index*state.stepMs, tap:null}));
+  }
+  function recordTap(event) {
+    // Audible input feedback, with no visual flash or in-game scoring reveal.
+    playTapSound();
+    if (!state.playing) return;
+    const corrected = inputTime(event) - state.correction;
+    const rel = corrected - state.firstPerf;
+    const w = windowMs();
+    if (rel < -w || rel > (noteCount()-1)*state.stepMs+w) return; // count-in/outro
+    let closest=null, distance=Infinity;
+    for (const target of state.targets) {
+      if (target.tap) continue;
+      const d=Math.abs(corrected-target.ideal);
+      if(d<distance){distance=d;closest=target;}
+    }
+    const tp = {rel, targetIndex:null, delta:null, grade:'extra'};
+    if (closest && distance <= w) {
+      const delta = corrected - closest.ideal;
+      tp.targetIndex=closest.index;
+      tp.delta=delta;
+      tp.grade=distance <= perfectMs()?'perfect':distance <= greatMs()?'great':'good';
+      closest.tap=tp;
+    }
+    state.taps.push(tp);
+  }
+  function abortSession(reason) {
+    if (!state.playing) return;
+    state.playing=false;cancelAnimationFrame(state.raf);
+    $('settings').hidden=false;document.querySelector('.play-layout').classList.remove('is-playing');$('start').disabled=false;
+    $('start').textContent='▶ もう一度チャレンジ';
+    $('liveMode').textContent='PAUSED';
+    $('message').textContent=reason;
+    $('gameSub').textContent='最初から再開してね。';
+  }
+  function finish() {
+    state.playing=false;cancelAnimationFrame(state.raf);
+    $('settings').hidden=false;document.querySelector('.play-layout').classList.remove('is-playing');$('start').disabled=false;
+    $('start').textContent='↻ もう一度チャレンジ';
+    $('liveMode').textContent='FINISHED';
+    $('message').textContent='結果を振り返ろう！';
+    $('gameSub').textContent='目盛をタップして、ズレを確認。音でも聴き比べてみて。';
+    let score=0,hits=0,absolute=0,bias=0,combo=0,maxCombo=0,early=0,late=0;
+    for(const target of state.targets){
+      if(!target.tap){combo=0;continue;}
+      const tap=target.tap;
+      hits++;absolute+=Math.abs(tap.delta);bias+=tap.delta;
+      if(tap.delta < -5) early++; if(tap.delta > 5) late++;
+      combo++;maxCombo=Math.max(maxCombo,combo);
+      score+=tap.grade==='perfect'?100:tap.grade==='great'?80:50;
+    }
+    const extras=state.taps.filter(t=>t.grade==='extra').length;
+    const percent=clamp(Math.round((score-extras*12)/noteCount()),0,100);
+    const rank=percent>=95?'S':percent>=85?'A':percent>=70?'B':percent>=50?'C':'D';
+    $('rank').textContent=rank;
+    $('accuracy').textContent=percent+'%';
+    $('average').textContent=hits?Math.round(absolute/hits)+' ms':'—';
+    $('bias').textContent=hits?signed(bias/hits):'—';
+    $('combo').textContent=String(maxCombo);
+    $('resultSummary').textContent=`${state.rhythm}ビート・${state.bpm} BPM · ${noteCount()}打のうち${hits}打成功 / MISS ${noteCount()-hits} / 余分 ${extras} · 早押し ${early}・遅押し ${late}`;
+    $('gridCaption').textContent=`1小節を${state.units}目盛に分割（1目盛 ${gridMs().toFixed(2)} ms）。理想は8目盛おき。下段の●はタップ実時刻、表示した目盛は最も近い位置に丸めているよ。`;
+    state.bar=0;state.selected=0;
+    $('results').hidden=false;
+    renderTimeline();
+    // Result panel is below the pad, so bring it into view.
+    $('results').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
+  }
+  function animationLoop() {
+    if(!state.playing)return;
+    if(performance.now() > state.targets[state.targets.length-1].ideal + windowMs() + 100){finish();return;}
+    state.raf=requestAnimationFrame(animationLoop);
+  }
+  async function start() {
+    if(state.playing) return;
+    stopReplay();$('start').disabled=true;
+    try {
+      await ensureAudio();
+      if(state.level==='custom') state.bpm=state.customBpm;
+      else {
+        const [min,max]=BPM_RANGES[state.rhythm][state.level];
+        state.bpm=min+Math.floor(Math.random()*(max-min+1));
+      }
+      state.division=state.rhythm===8?2:4;
+      state.units=state.rhythm===8?64:128;
+      state.beatMs=60000/state.bpm;
+      state.stepMs=state.beatMs/state.division;
+      const audioFirst=state.ctx.currentTime+.20;
+      // Only the four quarter-note pulses: absolutely no 8th/16th cue in live play.
+      for(let i=0;i<20;i++)quarterClick(audioFirst+i*state.beatMs/1000,i%4===0);
+      state.firstPerf=audioToPerf(audioFirst+4*state.beatMs/1000);
+      state.targets=newTargets();state.taps=[];
+      state.playing=true;$('settings').hidden=true;document.querySelector('.play-layout').classList.add('is-playing');$('results').hidden=true;
+      $('liveMode').textContent='AUDIO ONLY';
+      $('message').textContent='耳だけで刻もう';
+      $('gameSub').textContent=`4拍カウントイン → 4小節。${state.rhythm}ビート・${state.bpm} BPM。`; // no animated timing guide
+      $('start').textContent='プレイ中…';
+      $('start').blur();$('tap').blur();
+      // Starting from the button below the square must not require scrolling during count-in.
+      $('tap').scrollIntoView({behavior:'instant',block:'center'});
+      state.raf=requestAnimationFrame(animationLoop);
+    } catch(err) {
+      $('start').disabled=false;
+      $('message').textContent='音声を開始できなかった';
+      $('gameSub').textContent=err.message||'端末の音声設定を確認してね。';
+    }
+  }
+
+  const svgEscape=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+  function slotInfo(tap,bar){
+    const q=Math.round((tap.rel-bar*measureMs())/gridMs());
+    const slot=q<0?`開始位置より${-q}目盛前`:q>=state.units?`次小節側に${q-state.units}目盛`:`${q+1} / ${state.units}目盛`;
+    return {q,slot};
+  }
+  function renderTimeline() {
+    markChoice('[data-bar]', 'bar', state.bar);
+    const bar=state.bar, units=state.units;
+    const perBar=notesInBar();
+    const start=bar*measureMs(), end=start+measureMs();
+    const notes=state.targets.slice(bar*perBar,(bar+1)*perBar);
+    const pitch=units===64?17:12, margin=115, W=margin*2+pitch*units, H=152;
+    const x=q=>margin+pitch*q;
+    const lines=[`<rect x="0" y="0" width="${W}" height="${H}" fill="#0d1d33"/>`,
+      `<rect x="${x(0)}" y="22" width="${units*pitch}" height="105" rx="3" fill="#19304a"/>`];
+    for(let q=0;q<=units;q++){
+      const strong=q%(units/4)===0, beatSlot=q%8===0;
+      lines.push(`<line x1="${x(q)}" x2="${x(q)}" y1="${strong?16:27}" y2="126" stroke="${strong?'#718aac':beatSlot?'#50668c':'#2d425b'}" stroke-width="${strong?2:1}"/>`);
+      if(strong&&q<units)lines.push(`<text x="${x(q)+4}" y="13" font-size="11" fill="#c7d9ed">${1+q/(units/4)}拍</text>`);
+    }
+    lines.push('<text x="9" y="53" fill="#c5b9ff" font-size="12">正解（◆）</text><text x="9" y="104" fill="#9aefd5" font-size="12">自分（●）</text>');
+    for(let j=0;j<notes.length;j++){
+      const xx=x(j*8), note=notes[j];
+      lines.push(`<path d="M ${xx} 44 l 7 8 l -7 8 l -7 -8 Z" fill="${COLORS.ideal}"/>`);
+      if(!note.tap)lines.push(`<text x="${xx}" y="105" text-anchor="middle" font-size="17" fill="${COLORS.miss}" font-weight="bold">×</text>`);
+    }
+    // Every actual input is displayed, including extra taps, and continuous positioning is preserved.
+    const visible=state.taps.filter(tp => tp.targetIndex!==null ? Math.floor(tp.targetIndex/perBar)===bar : tp.rel>=start-7*gridMs()&&tp.rel<end+7*gridMs());
+    for(const tp of visible){
+      const xx=x((tp.rel-start)/gridMs()), isExtra=tp.grade==='extra';
+      const color=isExtra?COLORS.extra:COLORS.mine;
+      const title=isExtra?'余分なタップ':`${tp.targetIndex+1}打目 ${signed(tp.delta)}`;
+      lines.push(`<line x1="${xx}" x2="${xx}" y1="65" y2="82" stroke="${color}" stroke-width="2"/>`);
+      lines.push(`<circle cx="${xx}" cy="98" r="6.5" fill="${isExtra?'none':color}" stroke="${color}" stroke-width="2"><title>${svgEscape(title)} · ${svgEscape(slotInfo(tp,bar).slot)}</title></circle>`);
+    }
+    lines.push(`<text x="${x(0)}" y="143" fill="#adc2da" font-size="10">目盛 1/${units}</text><text x="${x(units)}" y="143" text-anchor="end" fill="#adc2da" font-size="10">${units}/${units}</text>`);
+    const svg=$('timeline');svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('width',W);svg.setAttribute('height',H);svg.innerHTML=lines.join('');
+    $('judgments').innerHTML=notes.map((r,j)=>{
+      const grade=r.tap?r.tap.grade:'miss',t=r.tap;
+      const label=t?signed(t.delta).replace(' ms','ms'):'MISS';
+      return `<button class="judgment ${grade} ${j===state.selected?'selected':''}" data-note="${j}" aria-label="${bar*perBar+j+1}打目の詳細"><span>${SYMBOLS[grade]}</span><small>${label}</small></button>`;
+    }).join('');
+    all('[data-note]').forEach(btn=>btn.addEventListener('click',()=>{state.selected=Number(btn.dataset.note);renderTimeline();scrollSelected();}));
+    const note=notes[state.selected], idealSlot=state.selected*8+1;
+    if(note?.tap){
+      const info=slotInfo(note.tap,bar),d=note.tap.delta;
+      const tendency=d < -5?'早め':d>5?'遅め':'ほぼジャスト';
+      $('noteDetail').innerHTML=`<b>${bar*perBar+state.selected+1}打目</b>：理想 ${idealSlot} / ${units}目盛 → 実際 <strong>${svgEscape(info.slot)}</strong><br>差：<strong>${signed(d)}</strong>（${tendency}）`;
+    } else {
+      $('noteDetail').innerHTML=`<b>${bar*perBar+state.selected+1}打目</b>：理想 ${idealSlot} / ${units}目盛 → <span style="color:${COLORS.miss}">MISS</span><br>このタイミングには対応するタップがなかったよ。`;
+    }
+  }
+  function scrollSelected(){
+    const frame=$('timelineScroll'),pitch=state.units===64?17:12;
+    frame.scrollLeft=Math.max(0,115+state.selected*8*pitch-frame.clientWidth*.43);
+  }
+
+  function stopReplay() {
+    if(state.replayBus && state.ctx){
+      try {const t=state.ctx.currentTime;state.replayBus.gain.cancelScheduledValues(t);state.replayBus.gain.setTargetAtTime(0,t,.012);} catch(_){}
+    }
+    state.replayBus=null;state.replaying=false;
+    clearTimeout(state.replayTimer);
+    $('replay').textContent='♫ 4小節を再生';
+    $('replay').classList.remove('playing');
+  }
+  async function replay() {
+    if(state.replaying){stopReplay();return;}
+    if(!state.targets.length || state.playing) return;
+    try {
+      await ensureAudio();
+      const ctx=state.ctx,bus=ctx.createGain();
+      bus.gain.value=.84;bus.connect(ctx.destination);
+      state.replayBus=bus;
+      const base=ctx.currentTime+.28,bt=state.beatMs/1000,st=state.stepMs/1000;
+      if($('replayClick').checked){for(let b=0;b<16;b++)quarterClick(base+b*bt,b%4===0,bus);}
+      if(state.drums!=='off'){
+        for(let b=0;b<16;b++){
+          const t=base+b*bt;
+          if(state.drums!=='snare' && b%4===0)kick(t,bus);
+          if(b%4===1||b%4===3)snare(t,bus);
+        }
+        if(state.drums==='8'||state.drums==='16'){
+          const subdivisions=Number(state.drums);
+          const sub=subdivisions===8?2:4;
+          for(let i=0;i<16*sub;i++)hiHat(base+i*bt/sub,bus,.015); // Quiet backing hats.
+        }
+      }
+      if(state.mix!=='mine')for(let i=0;i<noteCount();i++)hiHat(base+i*st,bus,.10); // Audible ideal hats.
+      if(state.mix!=='ideal')for(const tp of state.taps){
+        const time=base+tp.rel/1000;
+        if(time>ctx.currentTime+.02&&time<base+16*bt+.1)woodblock(time,bus,.85);
+      }
+      state.replaying=true;$('replay').textContent='■ 再生を停止';$('replay').classList.add('playing');
+      state.replayTimer=setTimeout(stopReplay,16*state.beatMs+600);
+    }catch(e){
+      stopReplay();$('replay').textContent='音が出ない場合はもう一度押してね';
+    }
+  }
+
+  all('[data-rhythm]').forEach(btn=>btn.addEventListener('click',()=>{
+    if(state.playing)return;
+    state.rhythm=Number(btn.dataset.rhythm);$('results').hidden=true;configure();
+  }));
+  all('[data-level]').forEach(btn=>btn.addEventListener('click',()=>{
+    if(state.playing)return;
+    state.level=btn.dataset.level;$('results').hidden=true;configure();
+  }));
+  $('bpm').addEventListener('input',e=>{state.customBpm=Number(e.target.value);configure();});
+  $('offset').addEventListener('input',e=>{state.correction=Number(e.target.value);configure();});
+  $('start').addEventListener('click',start);
+  $('tap').addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;e.preventDefault();recordTap(e);});
+  // Support very old browsers with no PointerEvent, without double counting modern ones.
+  if(!window.PointerEvent)$('tap').addEventListener('click',recordTap);
+  $('tap').addEventListener('contextmenu',e=>e.preventDefault());
+  document.addEventListener('keydown',e=>{
+    const key=e.code;
+    if(!['Space','KeyF','KeyJ'].includes(key) || e.repeat || keysDown.has(key))return;
+    if(e.target.closest('input,select,textarea') || (e.target.closest('button') && e.target!==$('tap'))) return;
+    e.preventDefault();keysDown.add(key);recordTap(e);
+  });
+  document.addEventListener('keyup',e=>{keysDown.delete(e.code);});
+  window.addEventListener('blur',()=>{keysDown.clear();if(state.playing)abortSession('画面が切り替わったため中断したよ');});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){stopReplay();if(state.playing)abortSession('別タブに切り替わったため中断したよ');}});
+  all('[data-bar]').forEach(btn=>btn.addEventListener('click',()=>{state.bar=Number(btn.dataset.bar);state.selected=0;renderTimeline();$('timelineScroll').scrollLeft=0;}));
+  all('[data-mix]').forEach(btn=>btn.addEventListener('click',()=>{stopReplay();state.mix=btn.dataset.mix;markChoice('[data-mix]','mix',state.mix);}));
+  all('[data-drums]').forEach(btn=>btn.addEventListener('click',()=>{stopReplay();state.drums=btn.dataset.drums;markChoice('[data-drums]','drums',state.drums);}));
+  $('replay').addEventListener('click',replay);
+  configure();
+})();
+
+</script>
+</body>
+</html>
